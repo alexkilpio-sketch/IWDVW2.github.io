@@ -35,24 +35,33 @@ const createScene = function () {
     carMaterial.diffuseColor = new BABYLON.Color3(1, 0.5, 0); // Оранжевый цвет
     car.material = carMaterial;
 
-    // Логика простого движения
+// Логика движения
     const moveSpeed = 0.1;
+    const rotationSpeed = 0.05;
 
-    // Слушаем нажатия клавиш для управления машиной
+    // Слушаем нажатия клавиш
     window.addEventListener("keydown", function (event) {
-        // Логика движения машины
+        // Получаем вектор, указывающий "вперёд" для машины
+        const forward = car.forward;
+        // Получаем вектор, указывающий "назад" для машины
+        const backward = forward.scale(-1);
+
         switch (event.key) {
             case "ArrowUp":
-                car.position.z += moveSpeed;
+                // Двигаем машину вперёд в её собственном направлении
+                car.position.addInPlace(forward.scale(moveSpeed));
                 break;
             case "ArrowDown":
-                car.position.z -= moveSpeed;
+                // Двигаем машину назад
+                car.position.addInPlace(backward.scale(moveSpeed));
                 break;
             case "ArrowLeft":
-                car.rotation.y -= 0.1;
+                // Поворачиваем машину влево
+                car.rotation.y -= rotationSpeed;
                 break;
             case "ArrowRight":
-                car.rotation.y += 0.1;
+                // Поворачиваем машину вправо
+                car.rotation.y += rotationSpeed;
                 break;
         }
     });
@@ -71,4 +80,5 @@ engine.runRenderLoop(function () {
 // Обрабатываем изменение размера окна
 window.addEventListener("resize", function () {
     engine.resize();
+
 });
