@@ -11,11 +11,13 @@ const createScene = function () {
     // Устанавливаем цвет фона (голубое небо)
     scene.clearColor = new BABYLON.Color3(0.5, 0.8, 0.9);
 
-    // Добавляем свободную камеру, которой можно управлять
-    const camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 5, -10), scene);
-    camera.parent = car;
-    camera.setTarget(BABYLON.Vector3.Zero());
-    camera.attachControl(canvas, true);
+    // Добавляем камеру, которая прикреплена к автомобилю
+    const camera = new BABYLON.FollowCamera("carCamera", new BABYLON.Vector3(0, 5, -10), scene, car);
+    camera.radius = 5; // Насколько далеко камера от машины
+    camera.heightOffset = 2; // Насколько высоко камера над машиной
+    camera.rotationOffset = 180; // Поворачивает камеру на 180 градусов, чтобы она смотрела вперёд
+    camera.cameraAcceleration = 0.05; // Насколько быстро камера догоняет машину
+    camera.maxCameraSpeed = 5; // Максимальная скорость движения камеры
 
     // Добавляем источник света
     const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
@@ -83,4 +85,5 @@ window.addEventListener("resize", function () {
     engine.resize();
 
 });
+
 
