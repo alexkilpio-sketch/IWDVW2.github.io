@@ -13,6 +13,7 @@ const createScene = function () {
 
     // Добавляем свободную камеру, которой можно управлять
     const camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 5, -10), scene);
+    camera.parent = car;
     camera.setTarget(BABYLON.Vector3.Zero());
     camera.attachControl(canvas, true);
 
@@ -82,3 +83,4 @@ window.addEventListener("resize", function () {
     engine.resize();
 
 });
+
