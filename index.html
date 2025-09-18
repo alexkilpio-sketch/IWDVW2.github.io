@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>3D Симулятор Вождения</title>
+    <title>2D Симулятор Вождения</title>
     <style>
         html, body {
             overflow: hidden;
@@ -9,14 +9,14 @@
             height: 100%;
             margin: 0;
             padding: 0;
+            background-color: #555; /* Темный фон для контраста */
         }
         #renderCanvas {
-            width: 100%;
-            height: 100%;
-            touch-action: none;
+            background-color: #888; /* Цвет "дороги" */
+            display: block;
+            margin: auto; /* Центрируем холст */
         }
     </style>
-    <script src="babylon.js"></script>
 </head>
 <body>
     <canvas id="renderCanvas"></canvas>
