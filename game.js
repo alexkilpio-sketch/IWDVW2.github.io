@@ -11,14 +11,6 @@ const createScene = function () {
     // Устанавливаем цвет фона (голубое небо)
     scene.clearColor = new BABYLON.Color3(0.5, 0.8, 0.9);
 
-    // Добавляем камеру, которая прикреплена к автомобилю
-    const camera = new BABYLON.FollowCamera("carCamera", new BABYLON.Vector3(0, 5, -10), scene, car);
-    camera.radius = 5; // Насколько далеко камера от машины
-    camera.heightOffset = 2; // Насколько высоко камера над машиной
-    camera.rotationOffset = 180; // Поворачивает камеру на 180 градусов, чтобы она смотрела вперёд
-    camera.cameraAcceleration = 0.05; // Насколько быстро камера догоняет машину
-    camera.maxCameraSpeed = 5; // Максимальная скорость движения камеры
-
     // Добавляем источник света
     const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
     light.intensity = 0.7;
@@ -38,7 +30,15 @@ const createScene = function () {
     carMaterial.diffuseColor = new BABYLON.Color3(1, 0.5, 0); // Оранжевый цвет
     car.material = carMaterial;
 
-// Логика движения
+    // Добавляем камеру, которая прикреплена к автомобилю
+    const camera = new BABYLON.FollowCamera("carCamera", new BABYLON.Vector3(0, 5, -10), scene, car);
+    camera.radius = 5; // Насколько далеко камера от машины
+    camera.heightOffset = 2; // Насколько высоко камера над машиной
+    camera.rotationOffset = 180; // Поворачивает камеру на 180 градусов, чтобы она смотрела вперёд
+    camera.cameraAcceleration = 0.05; // Насколько быстро камера догоняет машину
+    camera.maxCameraSpeed = 5; // Максимальная скорость движения камеры
+    
+    // Логика движения
     const moveSpeed = 0.1;
     const rotationSpeed = 0.05;
 
@@ -83,7 +83,5 @@ engine.runRenderLoop(function () {
 // Обрабатываем изменение размера окна
 window.addEventListener("resize", function () {
     engine.resize();
-
 });
-
 
